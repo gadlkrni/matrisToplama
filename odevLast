@@ -1,0 +1,808 @@
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <locale.h>
+
+void raSayi();
+void xoxFunc();
+
+/* 3. Soru için gerekli */
+
+void sayisalLoto();
+void sayisalLotoSecim1();
+void sayisalLotoKarisikSecim();
+void sayisalLotoBuyukSecim();
+char forYildiz(int);
+int listelemeDizisi[49][2] = {0};
+
+int main(){
+	
+	setlocale(LC_ALL, "Turkish"); // Türkçe karakterleri destekler.
+	
+	int secimOne;
+	
+	while ( 1 ){
+	
+		printf("\n HANGİ PROGRAMA GİRİŞ YAPMAK İSTERSİNİZ? \n");
+		printf("\n [1] - SAYI BULMA \n");
+		printf("\n [2] - XOX SİMÜLASYONU \n");
+		printf("\n [3] - SAYISAL LOTO SİMÜLASYONU \n");
+		printf("\n [4] - ÇIKIŞ \n");
+		
+		printf("\n Bir seçim yapın: ");
+		scanf("%d", &secimOne);
+		
+		if ( secimOne == 1 || secimOne == 2 || secimOne == 3 || secimOne == 4 ){
+			
+			if ( secimOne == 4 ){
+				
+				exit(0);
+				
+			}else if ( secimOne == 3 ){
+			
+				system("cls");
+				
+				sayisalLoto();
+				
+			}else if ( secimOne == 2 ){
+				
+				system("cls");
+				
+				xoxFunc();
+				
+			}else if ( secimOne == 1 ){
+				
+				system("cls");
+				
+				raSayi();
+				
+			}
+			
+			break;
+			
+		}else{
+			
+			system("cls");
+			
+		}
+		
+	}
+	
+	printf("\n\n"); system("pause");
+	return 0;
+	
+}
+
+void raSayi(){
+	
+	srand(time(NULL));
+	
+	int sayimiz = 1 + rand() % 100;
+	
+	int girilenSayi;
+	int kacinciDeneme = 0;
+	
+	int tekrar;
+	
+	printf("\n");
+
+	while ( 1 ){
+		
+		kacinciDeneme = kacinciDeneme + 1;
+		
+		/* printf("Sayi: %d \n\n", sayimiz); */
+		
+		printf(" Sayıyı tahmin edin: ");
+		scanf("%d", &girilenSayi);
+		
+		if ( girilenSayi > sayimiz ){
+			
+			printf("\n -- -- -- -- -- -- -- -- AŞAĞI \n\n");
+			
+		}else if ( girilenSayi < sayimiz ){
+			
+			printf("\n -- -- -- -- -- -- -- -- YUKARI \n\n");
+			
+		}else if ( girilenSayi == sayimiz ){
+			
+			printf("\n ** ** ** ** ** ** ** ** TEBRİKLER \n");
+			
+			printf("\n Sayıyı %d. denemede buldunuz. \n\n", kacinciDeneme);
+			
+			printf("\n TEKRAR OYNAMAK İSTER MİSİNİZ? \n");
+			printf("\n [1] - EVET \n");
+			printf("\n [2] - HAYIR \n");
+			
+			printf("\n Bir seçim yapın: ");
+			scanf("%d", &tekrar);
+			
+			if ( tekrar == 1 ){
+				
+				system("cls");
+				
+				raSayi();
+				
+			}else if ( tekrar == 2 ){
+				
+				system("cls");
+				
+				main();
+				
+			}
+			
+		}
+		
+	}
+
+}
+
+void xoxFunc(){
+	
+	char satir1[3]; // Kaç adet ise, o sayı.
+    satir1[0] = 0; // Bir harf girmek için 'X' tek tırnaklar ile.
+    satir1[1] = 0; // Boş karakter için 0 (sıfır) girilir.
+    satir1[2] = 0;
+    
+    char satir2[4]; // Kaç adet ise, o sayı.
+    satir2[0] = 0;
+    satir2[1] = 0;
+    satir2[2] = 0;
+    
+    char satir3[4]; // Kaç adet ise, o sayı.
+    satir3[0] = 0;
+    satir3[1] = 0;
+    satir3[2] = 0;
+    
+    int kiminSirasi = 1;
+    
+    int tekrar;
+    
+    int secimSatir;
+    int secimSirai;
+    
+    while ( 1 ){
+    	
+    	printf("\n ( %c )  ( %c )  ( %c ) \n", satir1[0], satir1[1], satir1[2]);
+		printf("\n ( %c )  ( %c )  ( %c ) \n", satir2[0], satir2[1], satir2[2]);
+		printf("\n ( %c )  ( %c )  ( %c ) \n", satir3[0], satir3[1], satir3[2]);
+		
+		kiminSirasi = kiminSirasi + 1;
+				
+		char girilecekHarf[1]; // Kaç adet ise, o sayı.
+		
+		if ( kiminSirasi % 2 == 0 ){
+			
+			girilecekHarf[0] = 'X';
+			
+		}else{
+			
+			girilecekHarf[0] = 'O';
+			
+		}
+		
+		printf("\n SIRADAKİ OYUNCU: -- -- -- -- ( %c ) \n", girilecekHarf[0]);
+    
+	    printf("\n KAÇINCI SATIRA EKLEMEK İSTERSİNİZ? \n");
+		printf("\n Bir seçim yapın: ");
+		scanf("%d", &secimSatir);
+		
+		if ( secimSatir == 1 || secimSatir == 2 || secimSatir == 3 ){
+			
+			printf("\n KAÇINCI SIRAYA EKLEMEK İSTERSİNİZ? \n");
+			printf("\n Bir seçim yapın: ");
+			scanf("%d", &secimSirai);
+			
+			if ( secimSirai == 1 || secimSirai == 2 || secimSirai == 3 ){
+				
+				if ( secimSatir == 1 ){
+					
+					satir1[secimSirai - 1] = girilecekHarf[0];
+					
+				}else if ( secimSatir == 2 ){
+					
+					satir2[secimSirai - 1] = girilecekHarf[0];
+					
+				}else if ( secimSatir == 3 ){
+					
+					satir3[secimSirai - 1] = girilecekHarf[0];
+					
+				}
+				
+				if ( // X OYUNCUSUNUN KAZANMA YERİ
+				
+					( satir1[0] == 'X' && satir1[1] == 'X' && satir1[2] == 'X' ) ||
+					( satir2[0] == 'X' && satir2[1] == 'X' && satir2[2] == 'X' ) ||
+					( satir3[0] == 'X' && satir3[1] == 'X' && satir3[2] == 'X' ) ||
+					
+					( satir1[0] == 'X' && satir2[0] == 'X' && satir3[0] == 'X' ) ||
+					( satir1[1] == 'X' && satir2[1] == 'X' && satir3[1] == 'X' ) ||
+					( satir1[2] == 'X' && satir2[2] == 'X' && satir3[2] == 'X' ) ||
+					
+					( satir1[0] == 'X' && satir2[1] == 'X' && satir3[2] == 'X' ) ||
+					( satir1[2] == 'X' && satir2[1] == 'X' && satir3[0] == 'X' )
+					
+				){
+					
+					system("cls");
+					
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir1[0], satir1[1], satir1[2]);
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir2[0], satir2[1], satir2[2]);
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir3[0], satir3[1], satir3[2]);
+					
+					printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+					
+					printf("\n -- -- -- -- -- - OYUNU X OYUNCUSU KAZANDI! -- -- -- -- -- - \n");
+					
+					printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+					
+					// YENİDEN OYNAMAK
+					
+					printf("\n TEKRAR OYNAMAK İSTER MİSİNİZ? \n");
+					printf("\n [1] - EVET \n");
+					printf("\n [2] - HAYIR \n");
+					
+					printf("\n Bir seçim yapın: ");
+					scanf("%d", &tekrar);
+					
+					if ( tekrar == 1 ){
+						
+						system("cls");
+						
+						xoxFunc();
+						
+					}else if ( tekrar == 2 ){
+						
+						system("cls");
+						
+						main();
+						
+					}
+					
+				}else if ( // O OYUNCUSUNUN KAZANMA YERİ
+				
+					( satir1[0] == 'O' && satir1[1] == 'O' && satir1[2] == 'O' ) ||
+					( satir2[0] == 'O' && satir2[1] == 'O' && satir2[2] == 'O' ) ||
+					( satir3[0] == 'O' && satir3[1] == 'O' && satir3[2] == 'O' ) ||
+					
+					( satir1[0] == 'O' && satir2[0] == 'O' && satir3[0] == 'O' ) ||
+					( satir1[1] == 'O' && satir2[1] == 'O' && satir3[1] == 'O' ) ||
+					( satir1[2] == 'O' && satir2[2] == 'O' && satir3[2] == 'O' ) ||
+					
+					( satir1[0] == 'O' && satir2[1] == 'O' && satir3[2] == 'O' ) ||
+					( satir1[2] == 'O' && satir2[1] == 'O' && satir3[0] == 'O' )
+					
+				){
+					
+					system("cls");
+					
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir1[0], satir1[1], satir1[2]);
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir2[0], satir2[1], satir2[2]);
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir3[0], satir3[1], satir3[2]);
+					
+					printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+					
+					printf("\n -- -- -- -- -- - OYUNU O OYUNCUSU KAZANDI! -- -- -- -- -- - \n");
+					
+					printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+					
+					// YENİDEN OYNAMAK
+					
+					printf("\n TEKRAR OYNAMAK İSTER MİSİNİZ? \n");
+					printf("\n [1] - EVET \n");
+					printf("\n [2] - HAYIR \n");
+					
+					printf("\n Bir seçim yapın: ");
+					scanf("%d", &tekrar);
+					
+					if ( tekrar == 1 ){
+						
+						system("cls");
+						
+						xoxFunc();
+						
+					}else if ( tekrar == 2 ){
+						
+						system("cls");
+						
+						main();
+						
+					}
+					
+				}else if ( // BERABERE BİTME YERİ
+				
+					satir1[0] != 0 && satir1[1] != 0 && satir1[2] != 0 &&
+					satir2[0] != 0 && satir2[1] != 0 && satir2[2] != 0 &&
+					satir3[0] != 0 && satir3[1] != 0 && satir3[2] != 0
+					
+				){
+					
+					system("cls");
+					
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir1[0], satir1[1], satir1[2]);
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir2[0], satir2[1], satir2[2]);
+					printf("\n ( %c )  ( %c )  ( %c ) \n", satir3[0], satir3[1], satir3[2]);
+					
+					printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+					
+					printf("\n -- -- -- -- -- -- OYUNU BERABERE BİTİRDİNİZ! -- -- -- -- -- \n");
+					
+					printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+					
+					// YENİDEN OYNAMAK
+					
+					printf("\n TEKRAR OYNAMAK İSTER MİSİNİZ? \n");
+					printf("\n [1] - EVET \n");
+					printf("\n [2] - HAYIR \n");
+					
+					printf("\n Bir seçim yapın: ");
+					scanf("%d", &tekrar);
+					
+					if ( tekrar == 1 ){
+						
+						system("cls");
+						
+						xoxFunc();
+						
+					}else if ( tekrar == 2 ){
+						
+						system("cls");
+						
+						main();
+						
+					}
+					
+				}else{
+					
+					system("cls");
+					
+				}
+				
+			}else{ 	system("cls"); xoxFunc(); }
+			
+		}else{ 	system("cls"); xoxFunc(); }
+	
+	}
+
+}
+
+/* 3. SORU FONKSİYONLARI */
+
+void sayisalLoto(){
+	
+	// listelemeDizisi için sayıları sırayla girelim.
+	
+	int sayiListeFor; for ( sayiListeFor = 0; sayiListeFor < 49; sayiListeFor++ ){ listelemeDizisi[sayiListeFor][1] = sayiListeFor + 1; }
+	
+	int lotoSecim;
+			
+	printf("\n SAYISAL LOTO MENÜSÜNDE NE YAPMAK İSTERSİNİZ? \n");
+	printf("\n [1] - LOTO ÇEKİLİŞİ \n");
+	printf("\n [2] - İSTATİSTİKLER \n");
+	printf("\n [3] - ANA MENÜYE DÖN \n");
+	
+	printf("\n Bir seçim yapın: ");
+	scanf("%d", &lotoSecim);
+	
+	if ( lotoSecim == 1 ){
+		
+		sayisalLotoSecim1();
+		
+	}else if ( lotoSecim == 2 ){
+		
+		system("cls");
+		
+		int istatistikSecim;
+	
+		printf("\n İSTATİSTİKLERİ NASIL LİSTELEMEK İSTERSİNİZ? \n");
+		printf("\n [1] - KARIŞIK LİSTELE \n");
+		printf("\n [2] - BÜYÜKTEN KÜÇÜĞE DOĞRU LİSTELE \n");
+		
+		printf("\n Bir seçim yapın: ");
+		scanf("%d", &istatistikSecim);
+		
+		if ( istatistikSecim == 1 ){
+			
+			system("cls");
+			
+			sayisalLotoKarisikSecim();
+			
+		}else if ( istatistikSecim == 2 ){
+			
+			system("cls");
+			
+			sayisalLotoBuyukSecim();
+			
+		}
+		
+	}else if ( lotoSecim == 3 ){
+		
+		system("cls");
+			
+		main();
+		
+	}
+
+}
+
+void sayisalLotoKarisikSecim(){
+	
+	int sayiisteFor;
+	
+	printf("\n Sayı \t Kez \t Çubuk Grafik \n");
+	printf("\n ---- \t --- \t ------------ \n");
+	
+	for ( sayiisteFor = 0; sayiisteFor < 49; sayiisteFor++ ){
+	
+		printf("\n %d \t %d \t ", listelemeDizisi[sayiisteFor][1], listelemeDizisi[sayiisteFor][2]);
+		
+		forYildiz( listelemeDizisi[sayiisteFor][2] );
+		
+		printf("\n");
+		
+	}
+	
+	int tekrar;
+	
+	printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+	printf("\n SAYISAL LOTO ANA MENÜSÜNE DÖNMEK İÇİN SEÇİM YAPIN! \n");
+	printf("\n [1] - SAYISAL LOTO ANA MENÜSÜNE DÖN \n");
+	
+	printf("\n Bir seçim yapın: ");
+	scanf("%d", &tekrar);
+	
+	if ( tekrar == 1 ){
+		
+		system("cls");
+		
+		sayisalLoto();
+		
+	}
+	
+}
+
+char forYildiz(kacYildiz){ int yildizFor; for ( yildizFor = 0; yildizFor < kacYildiz; yildizFor++ ){ printf("*"); } }
+
+void sayisalLotoBuyukSecim(){
+	
+	int sayiisteFor;
+	
+	int listelemeDizisiBuyuk[49][2] = {0};
+	
+	// BAŞKA BİR DİZİYE ATALIM.
+	
+	for ( sayiisteFor = 0; sayiisteFor < 49; sayiisteFor++ ){
+		
+		listelemeDizisiBuyuk[sayiisteFor][1] = listelemeDizisi[sayiisteFor][1];
+		listelemeDizisiBuyuk[sayiisteFor][2] = listelemeDizisi[sayiisteFor][2];
+		
+	}
+	
+	printf("\n Sayı \t Kez \t Çubuk Grafik \n");
+	printf("\n ---- \t --- \t ------------ \n");
+	
+	// LİSTEMELEDİZİSİ İÇİNDEKİ DEĞERLERİ BÜYÜKTEN KÜÇÜĞE SIRALAYALIM.
+	
+	int onemliDegilListeleme1, onemliDegilListeleme2;
+	int sayiisteTwoListe, sayiisteListe;
+
+	for ( sayiisteListe = 0; sayiisteListe < 49; sayiisteListe++ ){
+		
+		for ( sayiisteTwoListe = sayiisteListe + 1; sayiisteTwoListe < 49; sayiisteTwoListe++ ){
+        	
+            if ( listelemeDizisiBuyuk[sayiisteListe][2] < listelemeDizisiBuyuk[sayiisteTwoListe][2] ){ /* < ifadesi büyükten küçüğe sıralar. */
+            	
+                onemliDegilListeleme1 = listelemeDizisiBuyuk[sayiisteListe][1];
+                onemliDegilListeleme2 = listelemeDizisiBuyuk[sayiisteListe][2];
+                
+                listelemeDizisiBuyuk[sayiisteListe][1] = listelemeDizisiBuyuk[sayiisteTwoListe][1];
+                listelemeDizisiBuyuk[sayiisteListe][2] = listelemeDizisiBuyuk[sayiisteTwoListe][2];
+                
+                listelemeDizisiBuyuk[sayiisteTwoListe][1] = onemliDegilListeleme1;
+                listelemeDizisiBuyuk[sayiisteTwoListe][2] = onemliDegilListeleme2;
+                
+            }
+            
+        }
+        
+    }
+    
+    // EKRANA YAZDIRALIM.
+    
+    for ( sayiisteFor = 0; sayiisteFor < 49; sayiisteFor++ ){
+    	
+    	if ( listelemeDizisiBuyuk[sayiisteFor][2] != 0 ){
+	
+			printf("\n %d \t %d \t ", listelemeDizisiBuyuk[sayiisteFor][1], listelemeDizisiBuyuk[sayiisteFor][2]);
+			
+			forYildiz( listelemeDizisiBuyuk[sayiisteFor][2] );
+			
+			printf("\n");
+			
+		}
+		
+	}
+	
+	int tekrar;
+	
+	printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+	printf("\n SAYISAL LOTO ANA MENÜSÜNE DÖNMEK İÇİN SEÇİM YAPIN! \n");
+	printf("\n [1] - SAYISAL LOTO ANA MENÜSÜNE DÖN \n");
+	
+	printf("\n Bir seçim yapın: ");
+	scanf("%d", &tekrar);
+	
+	if ( tekrar == 1 ){
+		
+		system("cls");
+		
+		sayisalLoto();
+		
+	}
+	
+}
+
+void sayisalLotoSecim1(){
+	
+	system("cls");
+		
+	int kullanicininGirdikleri[6] = {0}; // Kaç adet ise, o sayı.
+	
+	int kullaniciGirsin;
+	int sayiiste;
+	int sayiisteTwo;
+	int esitlikKontrol;
+	
+	int kacinciSirayaEklenecek = 0;
+	
+	while ( 1 ){
+		
+		printf("\n Loto için %d. sayıyı girin: ", kacinciSirayaEklenecek + 1);
+		scanf("%d", &kullaniciGirsin);
+		
+		if ( ( kullaniciGirsin > 0 ) && ( kullaniciGirsin < 50 ) ){
+			
+			for ( sayiiste = 0; sayiiste < 6; sayiiste++ ){
+				
+				if ( kullaniciGirsin == kullanicininGirdikleri[sayiiste] ){
+					
+					esitlikKontrol = 187;
+					
+					break;
+					
+				}else{
+					
+					esitlikKontrol = 103;
+					
+				}
+				
+			}
+			
+			if ( esitlikKontrol == 187 ){
+				
+				printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+				
+				printf("\n -- -- --- GİRDİĞİNİZ SAYI DAHA ÖNCEDEN EKLENMİŞ!! -- -- --- \n");
+				
+				printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+				
+			}else if ( esitlikKontrol == 103 ){
+			
+				kullanicininGirdikleri[kacinciSirayaEklenecek] = kullaniciGirsin;
+				
+				kacinciSirayaEklenecek = kacinciSirayaEklenecek + 1;
+				
+			}
+			
+		}else{
+			
+			printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+				
+			printf("\n -- -- -- LÜTFEN 1 İLE 49 ARASINDA BİR SAYI GİRİN!! -- -- -- \n");
+				
+			printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+			
+		}
+		
+		if ( kullanicininGirdikleri[5] != 0 ){
+			
+			break;
+			
+		}
+		
+	}
+	
+	// Kullanıcı yukarıda sorunsuzca birbirinden farklı 1 - 49 arasında sayı girdi.
+	
+	srand(time(NULL));
+	
+	int sisteminGirdikleri[6] = {0};
+	
+	int sistemdeKac = 0;
+	
+	while ( 1 ){
+		
+		int rasSayi = 1 + rand() % 49;
+		
+		for ( sayiiste = 0; sayiiste < 6; sayiiste++ ){
+				
+			if ( rasSayi == sisteminGirdikleri[sayiiste] ){
+				
+				esitlikKontrol = 187;
+					
+				break;
+				
+			}else{
+				
+				esitlikKontrol = 103;
+				
+			}
+					
+		}
+		
+		if ( esitlikKontrol == 103 ){
+		
+			sisteminGirdikleri[sistemdeKac] = rasSayi;
+			
+			sistemdeKac = sistemdeKac + 1;
+			
+		}
+		
+		if ( sisteminGirdikleri[5] != 0 ){
+			
+			break;
+			
+		}
+		
+	}
+	
+	// SİSTEMDEKİ SAYILARI KÜÇÜKTEN BÜYÜĞE SIRALATTIM - TAMAM ZOR OLDU!
+	
+	int onemliDegilSistem;
+	
+	for ( sayiiste = 0; sayiiste < 6; sayiiste++ ){
+		
+		for ( sayiisteTwo = sayiiste + 1; sayiisteTwo < 6; sayiisteTwo++ ){
+        	
+            if ( sisteminGirdikleri[sayiiste] > sisteminGirdikleri[sayiisteTwo] ){
+            	
+                onemliDegilSistem = sisteminGirdikleri[sayiiste];
+                
+                sisteminGirdikleri[sayiiste] = sisteminGirdikleri[sayiisteTwo];
+                
+                sisteminGirdikleri[sayiisteTwo] = onemliDegilSistem;
+                
+            }
+            
+        }
+        
+    }
+    
+    // KULLANICININ GİRDİĞİ SAYILARI KÜÇÜKTEN BÜYÜĞE SIRALATTIM - TAMAM ZOR OLDU!
+	
+	int onemliDegilKullanici;
+	
+	for ( sayiiste = 0; sayiiste < 6; sayiiste++ ){
+		
+		for ( sayiisteTwo = sayiiste + 1; sayiisteTwo < 6; sayiisteTwo++ ){
+        	
+            if ( kullanicininGirdikleri[sayiiste] > kullanicininGirdikleri[sayiisteTwo] ){
+            	
+                onemliDegilKullanici = kullanicininGirdikleri[sayiiste];
+                
+                kullanicininGirdikleri[sayiiste] = kullanicininGirdikleri[sayiisteTwo];
+                
+                kullanicininGirdikleri[sayiisteTwo] = onemliDegilKullanici;
+                
+            }
+            
+        }
+        
+    }
+    
+    // SIRALAMALAR VE SAYI BULMALAR BİTTİ - ŞİMDİ KAÇ ADET TUTURDUĞU CÜMLESİNE DEVAM.
+    
+    system("cls");
+    
+    printf("\n Kullanıcının Sayıları: \t");
+    
+    for ( sayiiste = 0; sayiiste < 6; sayiiste++ ){
+    	
+    	if ( sayiiste == 5 ){ printf(" %d", kullanicininGirdikleri[sayiiste]); }else{
+    		
+    		printf(" %d -", kullanicininGirdikleri[sayiiste]);
+    		
+		}
+		
+	}
+    
+    printf("\n\n Sistemin Sayıları: \t\t");
+    
+    for ( sayiiste = 0; sayiiste < 6; sayiiste++ ){
+    	
+    	if ( sayiiste == 5 ){ printf(" %d", sisteminGirdikleri[sayiiste]); }else{
+    		
+    		printf(" %d -", sisteminGirdikleri[sayiiste]);
+    		
+		}
+		
+	}
+	
+	// listelemeDizisi için verileri girelim.
+	
+	int listelemeDeger;
+	int listelemeAltin;
+	
+	for ( listelemeDeger = 0; listelemeDeger < 49; listelemeDeger++ ){
+		
+		for ( listelemeAltin = 0; listelemeAltin < 6; listelemeAltin++ ){
+			
+			if ( sisteminGirdikleri[listelemeAltin] == listelemeDizisi[listelemeDeger][1] ){
+				
+				listelemeDizisi[listelemeDeger][2] = listelemeDizisi[listelemeDeger][2] + 1;
+				
+			}
+			
+		}
+		
+	}
+	
+	// TUTMA KONTROL
+	
+	int tutanAdet = 0;
+	
+	for ( sayiiste = 0; sayiiste < 6; sayiiste++ ){
+	
+		for ( sayiisteTwo = 0; sayiisteTwo < 6; sayiisteTwo++ ){
+		
+			if ( sisteminGirdikleri[sayiiste] == kullanicininGirdikleri[sayiisteTwo] ){
+				
+				tutanAdet = tutanAdet + 1;
+				
+			}
+			
+		}
+		
+	}
+	
+	printf("\n");
+	
+	printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+	
+	if ( tutanAdet != 0 ){
+				
+	printf("\n -- -- - TEBRİKLER! TOPLAM %d ADET SAYI TUTTURDUNUZ! -- -- -- \n", tutanAdet);
+	
+	}else{
+		
+	printf("\n -- -- -- -- MAALESEF! HİÇ SAYI TUTTURAMADINIZ! -- -- -- --- \n");
+		
+	}
+		
+	printf("\n -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- \n");
+	
+	// LOTO OYUNU BİTTİ - TEKRAR SORMA İŞLEMİ
+	
+	int tekrar;
+	
+	printf("\n TEKRAR OYNAMAK İSTER MİSİNİZ? \n");
+	printf("\n [1] - EVET \n");
+	printf("\n [2] - HAYIR \n");
+	
+	printf("\n Bir seçim yapın: ");
+	scanf("%d", &tekrar);
+	
+	if ( tekrar == 1 ){
+		
+		system("cls");
+		
+		sayisalLotoSecim1();
+		
+	}else if ( tekrar == 2 ){
+		
+		system("cls");
+		
+		sayisalLoto();
+		
+	}
+	
+}
