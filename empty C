@@ -1,0 +1,23 @@
+/* -- -- UĞUR DALKIRAN -- 141602011 -- -- */
+
+#include <stdio.h>
+#include <locale.h>
+
+void raSayi();
+
+int main(){
+	
+	setlocale(LC_ALL, "Turkish"); // Türkçe karakterleri destekler.
+		
+	printf("\n Bir seçim yapın: ");
+	scanf("%d", &secimOne);
+	
+	printf("\n\n"); system("pause");
+	return 0;
+	
+}
+
+void raSayi(){
+	
+	
+}
